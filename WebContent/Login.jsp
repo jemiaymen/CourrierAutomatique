@@ -86,8 +86,7 @@ body {
         		 if(error != null) 
         			out.println("<p class='text-danger'>Login ou Mot de passe incorect !</p>");
         %>
-        <button class="btn btn-lg btn-success " type="submit">Log in</button>
-        <a  href="Signin" style="margin-left:125px;">Sign In</a>
+        <button class="btn btn-lg btn-success form-control" type="submit">Log in</button>
       </form>
 
     </div> <!-- /container -->

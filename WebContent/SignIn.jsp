@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Login</title>
+<title>Gere Utilisateur</title>
 
 <!-- Bootstrap -->
 <link
@@ -86,7 +86,7 @@ margin-top:20px;
 	<div class="container">
 
 		<form class="form-signin" role="form" method="post" action="Signin">
-			<h2 class="form-signin-heading">Register</h2>
+			<h2 class="form-signin-heading">Ajouter Utilisateur</h2>
 			<label class="sr-only">Login</label> <input type="text"
 				class="form-control" placeholder="Login" name="login" required
 				autofocus> <label class="sr-only">Mot de passe</label> <input
@@ -119,22 +119,33 @@ margin-top:20px;
 			<input title="Please enter Just number at least 8" type="text" class="form-control" pattern=".[0-9].{6,}" placeholder="Tel" name="tel" required
 			onchange=" this.setCustomValidity(this.validity.patternMismatch ? this.title: ''); ">
 			
+			<label >Role</label> 
+			<select class="form-control" name="role" required>
+				<option value="1">Administrateur</option>
+				<option value="2">Agence</option>
+				<option value="3">Service Central</option>
+				<option value="4">Zone</option>
+				<option value="5">Bureau D'ordre</option>
+			</select>
+			
 			<label class="sr-only">Adress</label> 
 			<textarea class="form-control" placeholder="Adress" name="adress" required></textarea>
 			<%
 				String error = request.getParameter("error");
+				String success = request.getParameter("success");
+				
 				if (error != null)
-					out.println("<p class='text-danger'>Login ou Mot de passe incorect !</p>");
+					out.println("<p class='text-danger'>Error !</p>");
+				else if(success != null)
+					out.println("<p class='text-success'>Success .</p>");
 			%>
-			<button class="btn btn-lg btn-success form-control" type="submit">Register</button>
+			<button class="btn btn-lg btn-success form-control" type="submit">Ajouter</button>
 		</form>
 
 	</div>
 	<!-- /container -->
 
 
-	<script
-		src="/CourrierAutomatique/bootstrapjsp/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 </html>

@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SmartHouse | Config</title>
+<title>Courrier | title</title>
 
 <!-- Bootstrap -->
 <link href="/CourrierAutomatique/bootstrapjsp/bootstrap/css/bootstrap.min.css"
@@ -85,7 +85,6 @@ body {
 		</div>
 	</div>
 
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="/CourrierAutomatique/bootstrapjsp/bootstrap/js/bootstrap.min.js"></script>
 
 

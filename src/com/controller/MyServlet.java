@@ -35,7 +35,7 @@ public class MyServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 	}
 
-	public void IsLogin(HttpServletRequest request, HttpServletResponse response,String go)
+	public void IsLogin(HttpServletRequest request, HttpServletResponse response,String role,String go)
 			throws IOException, ServletException {
 		String uid = null;
 		EntityManager em = emf.createEntityManager();
@@ -54,9 +54,14 @@ public class MyServlet extends HttpServlet {
 					if (u == null) {
 						response.sendRedirect("Logout");
 					} else {
-						request.setAttribute("user", u);
-						request.getRequestDispatcher("/"+go+".jsp").forward(
-								request, response);
+						if(u.getRole().equals(role)){
+							request.setAttribute("user", u);
+							request.getRequestDispatcher("/"+go+".jsp").forward(
+									request, response);
+						}else {
+							response.sendRedirect("Logout");
+						}
+						
 					}
 				} catch (Exception ex) {
 					response.sendRedirect("Login");

@@ -28,7 +28,7 @@ public class Profil extends MyServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IsLogin(request,response,"Profil");
+		IsLogin(request,response,"2","Profil");
 	}
 
 

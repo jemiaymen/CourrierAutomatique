@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,9 +18,9 @@ import com.model.*;
  * Servlet implementation class Signin
  */
 @WebServlet("/Signin")
-public class Signin extends HttpServlet {
+public class Signin extends MyServlet {
 	private static final long serialVersionUID = 1L;
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourrierAutomatique");
+	//EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourrierAutomatique");
        
 
     public Signin() {
@@ -28,7 +29,34 @@ public class Signin extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/SignIn.jsp").forward(request, response);
+
+//		int edit,del;
+//		
+//		try{
+//			edit = Integer.parseInt(request.getParameter("edit"));
+//		}catch(Exception ex){
+//			edit = 0;
+//		}
+//		
+//		try{
+//			del = Integer.parseInt(request.getParameter("del"));
+//		}catch(Exception ex){
+//			del = 0;
+//		}
+//		
+//		
+//		
+//		if(del != 0 ){
+//			delUser(del);
+//		}
+//		
+//		if(edit != 0){
+//			request.setAttribute("editu", Find(edit));
+//		}
+//		
+		
+		request.setAttribute("users",getAll());
+		IsLogin(request,response,"1","GUser");
 	}
 
 
@@ -41,16 +69,20 @@ public class Signin extends HttpServlet {
 		String cin = request.getParameter("cin");
 		String tel = request.getParameter("tel");
 		String adress = request.getParameter("adress");
+		String role = request.getParameter("role");
 		
 		
-		if(login != null && pw != null && pren != null && pren != null && nom != null && cin != null && tel != null && adress != null){
-			User u = new User(login ,pw,pren,nom,cin,adress,tel);
+		
+		if(role != null && login != null && pw != null && pren != null && pren != null && nom != null && cin != null && tel != null && adress != null){
+			User u = new User(role,login ,pw,pren,nom,cin,adress,tel);
 			if(!addUser(u)){
-				request.getRequestDispatcher("/SignIn.jsp?erro=yes").forward(request, response);
+				request.getRequestDispatcher("/GUser.jsp?error=yes").forward(request, response);
 			}else {
-				response.sendRedirect("Login");
+				response.sendRedirect("Singin?success=yes");
 			}
 		}
+		
+		
 	}
 
 	public boolean addUser(User u){
@@ -72,6 +104,46 @@ public class Signin extends HttpServlet {
 				em.close();
 			}
 			return false;
+		}
+	}
+	
+	public List<User> getAll() {
+		EntityManager em = emf.createEntityManager();
+
+		try {
+			return em.createQuery("SELECT u FROM User u ", User.class)
+					.getResultList();
+		} catch (Exception ex) {
+
+		}
+
+		return null;
+	}
+	
+	public boolean delUser(int id){
+		EntityManager em = emf.createEntityManager();
+		try{
+			em.getTransaction().begin();
+			User u = em.find(User.class, id);
+			em.remove(u);
+			em.getTransaction().commit();
+			em.close();
+			return true;
+		}catch(Exception ex){
+			if(em.getTransaction().isActive()){
+				em.getTransaction().rollback();
+				em.close();
+			}
+			return false;
+		}
+	}
+	
+	public User Find(int id){
+		EntityManager em = emf.createEntityManager();
+		try{
+			return em.find(User.class, id);
+		}catch(Exception ex){
+			return null;
 		}
 	}
 }
