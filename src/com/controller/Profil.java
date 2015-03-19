@@ -16,7 +16,7 @@ import com.model.User;
 
 
 @WebServlet("/Profil")
-public class Profil extends MyServlet {
+public class Profil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourrierAutomatique");
        
@@ -28,7 +28,7 @@ public class Profil extends MyServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IsLogin(request,response,"2","Profil");
+		//IsLogin(request,response,"2","Profil");
 	}
 
 

@@ -17,25 +17,20 @@ import com.model.User;
 public class MyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourrierAutomatique");   
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public MyServlet() {
         super();
-        // TODO Auto-generated constructor stub
+
     }
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
 
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
-	public void IsLogin(HttpServletRequest request, HttpServletResponse response,String role,String go)
+	public void IsLogin(HttpServletRequest request, HttpServletResponse response,String role,String url)
 			throws IOException, ServletException {
 		String uid = null;
 		EntityManager em = emf.createEntityManager();
@@ -56,7 +51,7 @@ public class MyServlet extends HttpServlet {
 					} else {
 						if(u.getRole().equals(role)){
 							request.setAttribute("user", u);
-							request.getRequestDispatcher("/"+go+".jsp").forward(
+							request.getRequestDispatcher("/" + url +".jsp").forward(
 									request, response);
 						}else {
 							response.sendRedirect("Logout");
@@ -64,14 +59,14 @@ public class MyServlet extends HttpServlet {
 						
 					}
 				} catch (Exception ex) {
-					response.sendRedirect("Login");
+					response.sendRedirect("Logout");
 				}
 
 			} else {
-				response.sendRedirect("Login");
+				response.sendRedirect("Logout");
 			}
 		} else {
-			response.sendRedirect("Login");
+			response.sendRedirect("Logout");
 		}
 
 	}

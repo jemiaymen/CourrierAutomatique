@@ -1,6 +1,6 @@
 package com.model;
 
-// Generated 18 mars 2015 10:01:27 by Hibernate Tools 4.3.1
+// Generated 19 mars 2015 12:02:24 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,14 +23,16 @@ public class Loc implements java.io.Serializable {
 	private User user;
 	private String lbl;
 	private String type;
+	private String lblzone;
 
 	public Loc() {
 	}
 
-	public Loc(User user, String lbl, String type) {
+	public Loc(User user, String lbl, String type, String lblzone) {
 		this.user = user;
 		this.lbl = lbl;
 		this.type = type;
+		this.lblzone = lblzone;
 	}
 
 	@Id
@@ -70,6 +72,15 @@ public class Loc implements java.io.Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	@Column(name = "lblzone", nullable = false, length = 250)
+	public String getLblzone() {
+		return this.lblzone;
+	}
+
+	public void setLblzone(String lblzone) {
+		this.lblzone = lblzone;
 	}
 
 }

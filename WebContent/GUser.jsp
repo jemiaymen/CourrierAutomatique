@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Courrier | title</title>
+<title>Administrateur | Gere Utilisateur </title>
 
 <!-- Bootstrap -->
 <link href="/CourrierAutomatique/bootstrapjsp/bootstrap/css/bootstrap.min.css"
@@ -69,12 +69,21 @@ body {
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <%
  	User u = (User) request.getAttribute("user");
+	User editu = (User) request.getAttribute("editu");	
+	String lbl="",lbltype="",lblzone="";
+	if(editu != null){
+		for (Loc l : editu.getLocs()){
+			lbl = l.getLbl();
+			lbltype = l.getType();
+			lblzone = l.getLblzone();
+		}
+	}
+	
  	if (u != null) {
  		out.println(u.getLogin());
  	}
  %><span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="Profil">Profil</a></li>
 							<li><a href="Logout">Logout</a></li>
 						</ul></li>
 				</ul>
@@ -86,16 +95,11 @@ body {
 
 		<div class="row">
 			<div class="col-lg-4">
-			<%
-				String edit = request.getParameter("edit");
-			
-				User editu = (User) request.getAttribute("editu");
 
-			%>
 			<form class="form-signin" role="form" method="post" action="Signin">
 			<h2 class="form-signin-heading">Ajouter Utilisateur</h2>
 			<label class="sr-only">Login</label> 
-			<input type="text" class="form-control" placeholder="Login" name="login" required autofocus value="<%= editu.getLogin() %>"> 
+			<input type="text" class="form-control" placeholder="Login" name="login" required autofocus value="<% if(editu != null) out.println(editu.getLogin()); %>"> 
 			<input
 				title="Password must contain at least 6 characters" type="password"
 				class="form-control" placeholder="Mot de passe" name="pw" required
@@ -103,29 +107,13 @@ body {
 				onchange="
         this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
         form.repw.pattern = this.value;
-        ">
+        " value="<% if(editu != null) out.println(editu.getPw()); %>">
 			<input type="password" class="form-control"
 				placeholder="Re Mot de passe" name="repw" required
 				title="Please enter the same Password as above"
 				onchange="
         this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
-        ">
-			
-			
-			<label class="sr-only">Prenom</label> 
-			<input type="text" class="form-control" placeholder="Prenom" name="pren" required>
-			
-			<label class="sr-only">Nom</label> 
-			<input type="text" class="form-control" placeholder="Nom" name="nom" required>
-			
-			<label class="sr-only">Cin</label> 
-			<input title="Please enter Just number at least 8" type="text" class="form-control" placeholder="Cin" name="cin" pattern=".[0-9].{6,}" required
-			onchange=" this.setCustomValidity(this.validity.patternMismatch ? this.title: ''); ">
-			
-			<label class="sr-only">Tel</label> 
-			<input title="Please enter Just number at least 8" type="text" class="form-control" pattern=".[0-9].{6,}" placeholder="Tel" name="tel" required
-			onchange=" this.setCustomValidity(this.validity.patternMismatch ? this.title: ''); ">
-			
+        " value="<% if(editu != null) out.println(editu.getPw()); %>">
 			<label >Role</label> 
 			<select class="form-control" name="role" required>
 				<option value="1">Administrateur</option>
@@ -135,26 +123,51 @@ body {
 				<option value="5">Bureau D'ordre</option>
 			</select>
 			
+			<label class="sr-only">Prenom</label> 
+			<input type="text" class="form-control" placeholder="Prenom" name="pren" required value="<% if(editu != null) out.println(editu.getPrenom()); %>">
+			
+			<label class="sr-only">Nom</label> 
+			<input type="text" class="form-control" placeholder="Nom" name="nom" required value="<% if(editu != null) out.println(editu.getNom()); %>">
+			
+			<label class="sr-only">Cin</label> 
+			<input title="Please enter Just number at least 8" type="text" class="form-control" placeholder="Cin" name="cin" pattern=".[0-9].{6,}" required
+			onchange=" this.setCustomValidity(this.validity.patternMismatch ? this.title: ''); " value="<% if(editu != null) out.println(editu.getCin()); %>">
+			
+			<label class="sr-only">Tel</label> 
+			<input title="Please enter Just number at least 8" type="text" class="form-control" pattern=".[0-9].{6,}" placeholder="Tel" name="tel" required
+			onchange=" this.setCustomValidity(this.validity.patternMismatch ? this.title: ''); " value="<% if(editu != null) out.println(editu.getTel()); %>">
+			
+			
+			
 			<label class="sr-only">Adress</label> 
-			<textarea class="form-control" placeholder="Adress" name="adress" required></textarea>
+			<textarea class="form-control" placeholder="Adress" name="adress" required><% if(editu != null) out.println(editu.getAdress()); %></textarea>
+			<br>
+			<label >Localisation et Zone</label> 
+
+			<input type="text" class="form-control" placeholder="Localisation Libelle" name="lbl" required value="<%= lbl %>">
+			<input type="text" class="form-control" placeholder="Type Localisation" name="typeloc" required value="<%= lbltype %>">
+			<input type="text" class="form-control" placeholder="Zone Libelle" name="lblzone" required value="<%= lblzone %>">
 			<%
 				String error = request.getParameter("error");
 				String success = request.getParameter("success");
-				
+				String edit = request.getParameter("edit");
 				
 				if (error != null)
 					out.println("<p class='text-danger'>Error !</p>");
 				else if(success != null)
 					out.println("<p class='text-success'>Success .</p>");
-				else if(edit != null)
-					out.println("<input type='hidden' value='yes' name='editconf'>");
+
+				
+				if(editu != null){
+					out.println("<input type='hidden' name='_id' value='"+ editu.getId() +"' >");
+				}
 				
 				
 				
 			%>
 			<br>
 			<button class="btn btn-lg btn-success form-control" type="submit">
-			<%if(edit != null) out.println("Modifier"); else out.println("Ajouter"); %>
+			<% if(edit != null) out.println("Modifier"); else out.println("Ajouter"); %>
 			</button>
 		</form>
 			</div>
