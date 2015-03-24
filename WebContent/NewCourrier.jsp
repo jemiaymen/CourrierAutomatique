@@ -61,7 +61,7 @@ body {
 							class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="Newcourrier">Ajouter courrier</a></li>
-							<li><a href="Signin">Utilisateur</a></li>
+							<li><a href="GPochette">Gerer Pochette</a></li>
 						</ul></li>
 
 				</ul>
@@ -72,6 +72,7 @@ body {
 	String dfuid = (String) request.getAttribute("dfuid");
 	String chfuid = (String) request.getAttribute("chfuid");
 	String chiuid = (String) request.getAttribute("chiuid");
+	String ps = (String) request.getAttribute("ps");
  	if (u != null) {
  		out.println(u.getLogin());
  	}
@@ -95,7 +96,17 @@ body {
 			</div>
 		</div>
 		<div class="row">
-				<form class="form-horizontal">
+				<form class="form-horizontal" method="post">
+					
+					<input type="hidden" name="dfuid" value="<%=u.getId() %>" >
+					<input type="hidden" name="dt" class="dt" >
+					
+					<div class="form-group">
+					    <label class="col-sm-3 control-label">Pochette</label>
+					    <div class=" col-sm-6">
+						    <%=ps %>
+						</div>
+					</div>
 					
 					<div class="form-group">
 					    <label class="col-sm-3 control-label">Destinataire final</label>
@@ -121,7 +132,7 @@ body {
 					<div class="form-group">
 					    <label class="col-sm-3 control-label">Courrier Type</label>
 					    <div class=" col-sm-6">
-						    <select class="form-control" name="type" id="ct">
+						    <select class="form-control" name="type" id="ct" required>
 						        <option value=""></option>
 						    	<option value="valeur">Courrier valeur</option>
 						    	<option value="simple">Courrier Simple</option>
@@ -132,7 +143,7 @@ body {
 					<div class="form-group">
 					    <label class="col-sm-3 control-label">Courrier Nature</label>
 					    <div class=" col-sm-6">
-						    <select class="form-control" name="nature" id="cn">
+						    <select class="form-control" name="nature" id="cn" required>
 
 						    </select>
 						</div>
@@ -141,7 +152,7 @@ body {
 					<div class="form-group">
 						<label class="col-sm-3 control-label">Montant</label>
 						<div class="col-sm-6">
-				    		<input type="text" class="form-control" pattern="[0-9]" placeholder="Montant" name="mnt" required>
+				    		<input type="text" class="form-control" pattern="[0-9]{1,6}" placeholder="Montant" name="mnt" required>
 						</div>
 					</div>
 					
@@ -162,6 +173,7 @@ body {
 		var date = new Date();
 		var formadate = date.getDate()  + '-' + (date.getMonth() + 1) + '-' +  date.getFullYear() ;
 		$('#dt').append(formadate);
+		$('.dt').val(formadate);
 
 		$('#ct').change(function(){
 			if($('#ct option:selected').val() =='valeur'){

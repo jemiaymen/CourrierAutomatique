@@ -22,6 +22,10 @@ import javax.persistence.TemporalType;
 @Table(name = "mode", catalog = "courrier")
 public class Mode implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Courrier courrier;
 	private String type;

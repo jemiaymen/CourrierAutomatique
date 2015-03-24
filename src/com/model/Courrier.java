@@ -25,6 +25,10 @@ import javax.persistence.TemporalType;
 @Table(name = "courrier", catalog = "courrier")
 public class Courrier implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Pochette pochette;
 	private User userByDfuid;

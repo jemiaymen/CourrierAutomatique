@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.model.Pochette;
 import com.model.User;
 
 /**
@@ -29,12 +30,14 @@ public class Newcourrier extends MyServlet {
 		request.setAttribute("dfuid",OptionUser("dfuid"));
 		request.setAttribute("chfuid",OptionUser("chfuid"));
 		request.setAttribute("chiuid",OptionUser("chiuid"));
+		request.setAttribute("ps",OptionPochette("ps"));
 		IsLogin(request,response,"2","NewCourrier");
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		
 	}
 	
 	public String OptionUser(String n){
@@ -51,6 +54,28 @@ public class Newcourrier extends MyServlet {
 		}catch(Exception ex){
 			return "";
 		}
+	}
+	
+	
+	public String OptionPochette(String n){
+		EntityManager em = emf.createEntityManager();
+		String re =" <select name='" + n + "' required class='form-control'>";
+		try{
+			List<Pochette> ps = em.createQuery("SELECT p FROM Pochette p ", Pochette.class).getResultList();
+			
+			for (Pochette p : ps){
+				re += "<option value='"+ p.getId() + "' >"+ p.getId() +"</option>";
+			}
+			re += "</select>";
+			return re;
+		}catch(Exception ex){
+			return "";
+		}
+	}
+	
+	public boolean AddCourrier(){
+		return false;
+		
 	}
 
 }

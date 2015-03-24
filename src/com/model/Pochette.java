@@ -20,6 +20,10 @@ import javax.persistence.Table;
 @Table(name = "pochette", catalog = "courrier")
 public class Pochette implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private int nbr;
 	private Set<Courrier> courriers = new HashSet<Courrier>(0);

@@ -8,8 +8,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -81,7 +79,6 @@ public class Signin extends MyServlet {
 		   adress != null && _id == null && lbl != null && lbltype != null &&
 		   lblzone != null){
 			User u = new User(role,login ,pw,pren,nom,cin,adress,tel);
-			Loc l = new Loc(u, lbl, lbltype, lblzone);
 			if(!addUser(u,lbl,lbltype,lblzone)){
 				request.getRequestDispatcher("/GUser.jsp?error=yes").forward(request, response);
 			}else {
