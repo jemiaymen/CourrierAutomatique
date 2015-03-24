@@ -1,6 +1,6 @@
 package com.model;
 
-// Generated 19 mars 2015 12:02:24 by Hibernate Tools 4.3.1
+// Generated 23 mars 2015 12:42:15 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,6 +30,10 @@ public class User implements java.io.Serializable {
 	private String cin;
 	private String adress;
 	private String tel;
+	private Set<Courrier> courriersForDfuid = new HashSet<Courrier>(0);
+	private Set<Courrier> courriersForChfuid = new HashSet<Courrier>(0);
+	private Set<Courrier> courriersForChuid = new HashSet<Courrier>(0);
+	private Set<Courrier> courriersForChiuid = new HashSet<Courrier>(0);
 	private Set<Loc> locs = new HashSet<Loc>(0);
 
 	public User() {
@@ -48,7 +52,10 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(String role, String login, String pw, String prenom,
-			String nom, String cin, String adress, String tel, Set<Loc> locs) {
+			String nom, String cin, String adress, String tel,
+			Set<Courrier> courriersForDfuid, Set<Courrier> courriersForChfuid,
+			Set<Courrier> courriersForChuid, Set<Courrier> courriersForChiuid,
+			Set<Loc> locs) {
 		this.role = role;
 		this.login = login;
 		this.pw = pw;
@@ -57,6 +64,10 @@ public class User implements java.io.Serializable {
 		this.cin = cin;
 		this.adress = adress;
 		this.tel = tel;
+		this.courriersForDfuid = courriersForDfuid;
+		this.courriersForChfuid = courriersForChfuid;
+		this.courriersForChuid = courriersForChuid;
+		this.courriersForChiuid = courriersForChiuid;
 		this.locs = locs;
 	}
 
@@ -141,6 +152,42 @@ public class User implements java.io.Serializable {
 
 	public void setTel(String tel) {
 		this.tel = tel;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByDfuid")
+	public Set<Courrier> getCourriersForDfuid() {
+		return this.courriersForDfuid;
+	}
+
+	public void setCourriersForDfuid(Set<Courrier> courriersForDfuid) {
+		this.courriersForDfuid = courriersForDfuid;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByChfuid")
+	public Set<Courrier> getCourriersForChfuid() {
+		return this.courriersForChfuid;
+	}
+
+	public void setCourriersForChfuid(Set<Courrier> courriersForChfuid) {
+		this.courriersForChfuid = courriersForChfuid;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByChuid")
+	public Set<Courrier> getCourriersForChuid() {
+		return this.courriersForChuid;
+	}
+
+	public void setCourriersForChuid(Set<Courrier> courriersForChuid) {
+		this.courriersForChuid = courriersForChuid;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByChiuid")
+	public Set<Courrier> getCourriersForChiuid() {
+		return this.courriersForChiuid;
+	}
+
+	public void setCourriersForChiuid(Set<Courrier> courriersForChiuid) {
+		this.courriersForChiuid = courriersForChiuid;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
