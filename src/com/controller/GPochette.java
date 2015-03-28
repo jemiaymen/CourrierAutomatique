@@ -9,8 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.model.Courrier;
 import com.model.Pochette;
-import com.model.User;
+
 
 /**
  * Servlet implementation class GPochette
@@ -27,6 +28,16 @@ public class GPochette extends MyServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int c ;
+		
+		try{
+			c = Integer.parseInt(request.getParameter("p"));
+			request.setAttribute("courrier",getAllCourrier(c));
+		}catch(Exception ex){
+			c = 0;
+		}
+		
 		request.setAttribute("ps", getAllPochette());
 		IsLogin(request,response,"2","GPochette");
 	}
@@ -72,6 +83,37 @@ public class GPochette extends MyServlet {
 			
 		} catch (Exception e) {
 			re = "";
+		}
+		return re;
+	}
+	
+	public String getAllCourrier(int pid){
+		EntityManager em = emf.createEntityManager();
+		String re = "";
+		try{
+			Pochette p = em.find(Pochette.class, pid);
+			
+			if(p != null && p.getNbr() > 0){
+				re +="<br><h2>Courriers</h2>";
+				re +="<table class='table' >";
+				re +="<th>Type</th>";
+				re +="<th>Nature</th>";
+				re +="<th>Montan</th>";
+				re +="<th>Date Intial</th>";
+				for(Courrier c : p.getCourriers()){
+					re +="<tr>";
+					re +="<td>" + c.getType() + "</td><td>" + c.getNature() +"</td><td>" + c.getMontant() + "</td><td>" + c.getInitdate()+"</td>";
+					re +="</tr>";
+					
+				}
+				
+				re +="</table>";
+			}else {
+				return re;
+			}
+			
+		}catch(Exception ex){
+			
 		}
 		return re;
 	}

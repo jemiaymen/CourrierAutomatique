@@ -17,19 +17,39 @@ import com.model.User;
 public class MyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourrierAutomatique");   
-
+	public int _id ;
     public MyServlet() {
         super();
 
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		_id = getId(request);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
+	public int getId(HttpServletRequest request){
+		Cookie[] c = request.getCookies();
+		String uid = null;
+		if (c != null) {
+			for (Cookie cookie : c) {
+				if (cookie.getName().equals("uid")) {
+					uid = cookie.getValue();
+				}
+			}
+			if (uid != null) {
+				try {
+					return Integer.parseInt(uid);
+				}catch(Exception ex){
+				}
+			}
+			
+		}
+		return 0;
+	}
+	
 	public void IsLogin(HttpServletRequest request, HttpServletResponse response,String role,String url)
 			throws IOException, ServletException {
 		String uid = null;
@@ -51,8 +71,7 @@ public class MyServlet extends HttpServlet {
 					} else {
 						if(u.getRole().equals(role)){
 							request.setAttribute("user", u);
-							request.getRequestDispatcher("/" + url +".jsp").forward(
-									request, response);
+							request.getRequestDispatcher("/" + url +".jsp").forward(request, response);
 						}else {
 							response.sendRedirect("Logout");
 						}

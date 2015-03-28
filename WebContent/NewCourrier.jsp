@@ -86,7 +86,20 @@ body {
 		</div>
 	</nav>
 	<div class="container ">
-
+	
+		<div class="row">
+			<%
+				String error = (String) request.getAttribute("error");
+			
+				String success =(String) request.getAttribute("success");
+				
+				if(error != null){
+					out.println(error);
+				}else if (success != null){
+					out.println(success);
+				}
+			%>
+		</div>
 		<div class="row">
 			<div class="col-sm-4">
 			Chargé du courrier : <b> <% if (u != null) out.println(u.getLogin()); %></b>
@@ -98,7 +111,7 @@ body {
 		<div class="row">
 				<form class="form-horizontal" method="post">
 					
-					<input type="hidden" name="dfuid" value="<%=u.getId() %>" >
+					<input type="hidden" name="chuid" value="<%=u.getId() %>" >
 					<input type="hidden" name="dt" class="dt" >
 					
 					<div class="form-group">
