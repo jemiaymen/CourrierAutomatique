@@ -41,11 +41,9 @@ public class Login extends HttpServlet {
 				request.getRequestDispatcher("/Login.jsp?error=yes").forward(
 						request, response);
 			} else {
-<<<<<<< HEAD
-				response.sendRedirect("home");
-=======
-				response.sendRedirect("Newcourrier");
->>>>>>> origin/master
+
+				response.sendRedirect("Gmode");
+
 			}
 		}
 

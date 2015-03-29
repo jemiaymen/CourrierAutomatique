@@ -81,6 +81,13 @@ String mode = (String) request.getAttribute("mode");
 	</nav>
 	<div class="container ">
 		
+		<div class="row">
+			<%
+				if(mode != null){
+					out.println(mode);
+				}
+			%>
+		</div>
 		
 		<div class="row">
 			<div class="col-sm-12">
@@ -93,16 +100,10 @@ String mode = (String) request.getAttribute("mode");
 				}
 			%>
 			</div>
-			
 		</div>
 		
-		<div class="row">
-			<%
-				if(mode != null){
-					out.println(mode);
-				}
-			%>
-		</div>
+		
+
 	</div>
 
 	<script src="/CourrierAutomatique/bootstrapjsp/bootstrap/js/bootstrap.min.js"></script>
