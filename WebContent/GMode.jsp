@@ -61,7 +61,9 @@ String mode = (String) request.getAttribute("mode");
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="#">Home</a></li>
-					<li><a href="Gmode">Confirmation Courrier <% if (courrier[1] != null) out.println("<span class='badge'>" + courrier[1] +"</span>") ;%> </a></li>
+					<li><a href="ConfRCourrier">Confirmation Courrier reception </a></li>
+					<li><a href="Gmode">Confirmation Courrier Envoi <% if (courrier[1] != null) out.println("<span class='badge'>" + courrier[1] +"</span>") ;%> </a></li>
+					
 				</ul>
 				<ul class="nav navbar-nav pull-right">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
