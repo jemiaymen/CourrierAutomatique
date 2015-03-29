@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@page import="java.util.*,com.model.*"%>
+<%@page import="java.util.*,com.model.*,com.controller.*"%>
 
 
 
@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>New Courrier</title>
+<title>Confirmation Courrier</title>
 
 <!-- Bootstrap -->
 <link href="/CourrierAutomatique/bootstrapjsp/bootstrap/css/bootstrap.min.css"
@@ -40,6 +40,11 @@ body {
 </head>
 <body>
 
+<%
+String[] courrier = (String[]) request.getAttribute("courrier");
+User u = (User) request.getAttribute("user");
+String mode = (String) request.getAttribute("mode");
+%>
 	<!-- Fixed navbar -->
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -56,21 +61,13 @@ body {
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="#">Home</a></li>
-					<li class="dropdown active"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown">Courrier<span
-							class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="GPochette">Gerer Pochette</a></li>
-							<li><a href="Newcourrier">Ajouter courrier</a></li>
-							<li><a href="ConfCourrier">Confirmation d'ajout Courrier</a></li>
-						</ul></li>
-
+					<li><a href="ConfRCourrier">Confirmation Courrier reception <% if (courrier[1] != null) out.println("<span class='badge'>" + courrier[1] +"</span>") ;%></a></li>
+					<li><a href="Gmode">Confirmation Courrier Envoi  </a></li>
 				</ul>
 				<ul class="nav navbar-nav pull-right">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <%
- 	User u = (User) request.getAttribute("user");
-	String ps = (String) request.getAttribute("ps");
+
  	if (u != null) {
  		out.println(u.getLogin());
  	}
@@ -84,36 +81,22 @@ body {
 		</div>
 	</nav>
 	<div class="container ">
-		<div class="row">
-			<div class="col-sm-offset-2 col-sm-3">
-				<form method="post">
-					<input type="hidden" name="addp" value="yes">
-					<button type="submit" class="btn btn-success btn-lg">Nouveau Pochette</button>
-				</form>
-			</div>
-			<div class="col-sm-6">
-			<h2>Pochettes</h2>
-			<table class="table">
-				<th>Pochette ID</th>
-				<th>Nombre de Courrier </th>
-				<th>Action</th>
-				<%=ps %>
-			</table>
-			</div>
-				
-		</div>
-
 		
 		<div class="row">
-			<div class="col-sm-offset-2 col-sm-9">
+			<div class="col-sm-12">
 			<%
-				String courrier = (String) request.getAttribute("courrier");
-				if(courrier != null){
-					out.println(courrier);
+				
+				if(courrier[0] != null){
+					out.println(courrier[0]);
+				}else{
+					out.println("<h3>Pas de Courrier à Confirmer</h3>");
 				}
 			%>
 			</div>
 		</div>
+		
+		
+
 	</div>
 
 	<script src="/CourrierAutomatique/bootstrapjsp/bootstrap/js/bootstrap.min.js"></script>
