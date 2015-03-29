@@ -29,9 +29,9 @@ public class Newcourrier extends MyServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setAttribute("dfuid",OptionUser("dfuid",3));
-		request.setAttribute("chfuid",OptionUser("chfuid",4));
-		request.setAttribute("chiuid",OptionUser("chiuid",4));
+		request.setAttribute("dfuid",OptionUser("dfuid"));
+		request.setAttribute("chfuid",OptionUser("chfuid"));
+		request.setAttribute("chiuid",OptionUser("chiuid"));
 		request.setAttribute("ps",OptionPochette("ps"));
 		IsLogin(request,response,"2","NewCourrier");
 	}
@@ -85,18 +85,18 @@ public class Newcourrier extends MyServlet {
 			}
 		}
 		
-		request.setAttribute("dfuid",OptionUser("dfuid",3));
-		request.setAttribute("chfuid",OptionUser("chfuid",4));
-		request.setAttribute("chiuid",OptionUser("chiuid",4));
+		request.setAttribute("dfuid",OptionUser("dfuid"));
+		request.setAttribute("chfuid",OptionUser("chfuid"));
+		request.setAttribute("chiuid",OptionUser("chiuid"));
 		request.setAttribute("ps",OptionPochette("ps"));
 		IsLogin(request,response,"2","NewCourrier");
 	}
 	
-	public String OptionUser(String n,int role){
+	public String OptionUser(String n){
 		EntityManager em = emf.createEntityManager();
 		String re =" <select name='" + n + "' required class='form-control'>";
 		try{
-			List<User> users = em.createQuery("SELECT u FROM User u WHERE u.role ='" + role + "'", User.class).getResultList();
+			List<User> users = em.createQuery("SELECT u FROM User u ", User.class).getResultList();
 			
 			for (User u : users){
 				re += "<option value='"+ u.getId() + "' >"+ u.getLogin() +"</option>";
@@ -134,8 +134,8 @@ public class Newcourrier extends MyServlet {
 			User u3 = em.find(User.class,chfuid);
 			User u4 = em.find(User.class, chiuid);
 			Pochette p = em.find(Pochette.class, ps);
-			Courrier c = new Courrier(p,u1,u3,u2,u4,type,nature,montan,new Date());
-			c.setEtat(0);
+			Courrier c = new Courrier(p,u1,u2,u3,u4,type,nature,montan,new Date());
+			c.setEtat(1);
 			em.getTransaction().begin();
 			em.persist(c);
 			p.setNbr(p.getNbr() + 1);

@@ -42,7 +42,7 @@ public class Login extends HttpServlet {
 						request, response);
 			} else {
 
-				response.sendRedirect("home");
+				response.sendRedirect("Gmode");
 
 			}
 		}

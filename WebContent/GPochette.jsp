@@ -60,9 +60,8 @@ body {
 						class="dropdown-toggle" data-toggle="dropdown">Courrier<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="GPochette">Gerer Pochette</a></li>
 							<li><a href="Newcourrier">Ajouter courrier</a></li>
-							<li><a href="ConfCourrier">Confirmation d'ajout Courrier</a></li>
+							<li><a href="GPochette">Gerer Pochette</a></li>
 						</ul></li>
 
 				</ul>

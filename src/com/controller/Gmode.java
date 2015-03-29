@@ -45,7 +45,7 @@ public class Gmode extends MyServlet {
 		
 		
 		
-		IsLogin(request,response,"4","GMode");
+		IsLogin(request,response,"3","GMode");
 	}
 
 
@@ -97,7 +97,7 @@ public class Gmode extends MyServlet {
 		try{
 			em.getTransaction().begin();
 			Courrier c = em.find(Courrier.class, con);
-			c.setEtat(3);
+			c.setEtat(2);
 			Mode m = new Mode(c,type,nbr,tran,chf,dt);
 			em.persist(m);
 			em.getTransaction().commit();
@@ -133,7 +133,7 @@ public class Gmode extends MyServlet {
 		String re = "";
 		String nbr ="0";
 		try {
-			List<Courrier> cs = em.createQuery("SELECT c FROM Courrier c WHERE c.userByChiuid.id =" + uid + "AND c.etat=" + 2, Courrier.class).getResultList();
+			List<Courrier> cs = em.createQuery("SELECT c FROM Courrier c WHERE c.userByChiuid.id =" + uid + "AND c.etat=" + 1, Courrier.class).getResultList();
 			if(cs != null){
 				re +="<br><h2>Courriers</h2>";
 				re +="<table class='table' >";
@@ -156,7 +156,7 @@ public class Gmode extends MyServlet {
 			}
 			
 		} catch (Exception e) {
-			return null;
+
 		}
 		String[] result = {re,nbr};
 		return result;
