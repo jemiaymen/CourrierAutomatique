@@ -60,8 +60,8 @@ User u = (User) request.getAttribute("user");
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="#">Home</a></li>
-					<li><a href="ConfRCourrier">Confirmation Courrier reception <% if (courrier[1] != null) out.println("<span class='badge'>" + courrier[1] +"</span>") ;%></a></li>
-					<li><a href="Gmode">Confirmation Courrier Envoi  </a></li>
+					<li class='active'><a href="ConfRCourrierFD">Confirmation Courrier reception <% if (courrier[1] != null) out.println("<span class='badge'>" + courrier[1] +"</span>") ;%></a></li>
+					<li><a href="ConfCourrierAR">Confirmation Courrier A/R</a></li>
 				</ul>
 				<ul class="nav navbar-nav pull-right">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"

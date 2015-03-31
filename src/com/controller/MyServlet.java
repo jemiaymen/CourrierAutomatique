@@ -18,6 +18,7 @@ public class MyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourrierAutomatique");   
 	public int _id ;
+	public String _role;
     public MyServlet() {
         super();
 
@@ -25,11 +26,21 @@ public class MyServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		_id = getId(request);
+		_role = getRole();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
+	public String getRole(){
+		EntityManager em = emf.createEntityManager();
+		try {
+			User  u = em.find(User.class,_id);
+			return u.getRole();		
+		} catch (Exception e) {
+			return "";
+		}
+	}
 	public int getId(HttpServletRequest request){
 		Cookie[] c = request.getCookies();
 		String uid = null;

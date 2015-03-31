@@ -16,9 +16,9 @@
 <link href="/CourrierAutomatique/bootstrapjsp/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) 
 <script
-	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,6 +43,7 @@ body {
 <%
 String[] courrier = (String[]) request.getAttribute("courrier");
 User u = (User) request.getAttribute("user");
+String rej = (String) request.getAttribute("rej");
 %>
 	<!-- Fixed navbar -->
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -60,8 +61,8 @@ User u = (User) request.getAttribute("user");
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="#">Home</a></li>
-					<li><a href="ConfRCourrier">Confirmation Courrier reception <% if (courrier[1] != null) out.println("<span class='badge'>" + courrier[1] +"</span>") ;%></a></li>
-					<li><a href="Gmode">Confirmation Courrier Envoi  </a></li>
+					<li ><a href="ConfRCourrierFD">Confirmation Courrier reception </a></li>
+					<li class='active'><a href="ConfCourrierAR">Confirmation Courrier A/R <% if (courrier[1] != null) out.println("<span class='badge'>" + courrier[1] +"</span>") ;%></a></li>
 				</ul>
 				<ul class="nav navbar-nav pull-right">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -82,6 +83,13 @@ User u = (User) request.getAttribute("user");
 	<div class="container ">
 		
 		<div class="row">
+			<%
+				if(rej != null)
+					out.println(rej);
+			%>
+		</div>
+		
+		<div class="row">
 			<div class="col-sm-12">
 			<%
 				
@@ -93,6 +101,7 @@ User u = (User) request.getAttribute("user");
 			%>
 			</div>
 		</div>
+		
 		
 		
 
