@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@page import="java.util.*,com.model.*,com.controller.*"%>
+<%@page import="java.util.*,com.model.*"%>
 
 
 
@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Confirmation Courrier</title>
+<title>Administrateur | Flux E/S </title>
 
 <!-- Bootstrap -->
 <link href="/CourrierAutomatique/bootstrapjsp/bootstrap/css/bootstrap.min.css"
@@ -28,7 +28,7 @@
 
 <style media="screen" type="text/css">
 body {
-	padding-top: 100px;
+	padding-top: 70px;
 	padding-bottom: 30px;
 }
 .logo{
@@ -39,10 +39,6 @@ body {
 </head>
 <body>
 
-<%
-String[] courrier = (String[]) request.getAttribute("courrier");
-User u = (User) request.getAttribute("user");
-%>
 	<!-- Fixed navbar -->
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -59,13 +55,21 @@ User u = (User) request.getAttribute("user");
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="#">Home</a></li>
-					<li class='active'><a href="ConfRCourrierFD">Confirmation Courrier reception <% if (courrier[1] != null) out.println("<span class='badge'>" + courrier[1] +"</span>") ;%></a></li>
-					<li><a href="ConfCourrierAR">Confirmation Courrier A/R</a></li>
+					<li class="dropdown active"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown">Admin<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="Flux">Flux E/S courrier</a></li>
+							<li><a href="Signin">Utilisateur</a></li>
+						</ul></li>
+
 				</ul>
 				<ul class="nav navbar-nav pull-right">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <%
-
+ 	User u = (User) request.getAttribute("user");
+	String courrier = (String) request.getAttribute("courrier");
+	
  	if (u != null) {
  		out.println(u.getLogin());
  	}
@@ -79,25 +83,23 @@ User u = (User) request.getAttribute("user");
 		</div>
 	</nav>
 	<div class="container ">
-		
 		<div class="row">
 			<div class="col-sm-12">
 			<%
 				
-				if(courrier[0] != null){
-					out.println(courrier[0]);
+				if(courrier != null){
+					out.println(courrier);
 				}else{
-					out.println("<h3>Pas de Courrier à Confirmer</h3>");
+					out.println("<h3>Pas de Courrier r</h3>");
 				}
 			%>
 			</div>
 		</div>
-		
-		
-
 	</div>
 
 	<script src="/CourrierAutomatique/bootstrapjsp/bootstrap/js/bootstrap.min.js"></script>
+
+
 
 </body>
 </html>
